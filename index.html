@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Price Searcher</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/stock.css') }}">
+</head>
+
+<body>
+    <div class="top-bar"></div>
+
+    <form id="searchForm" class="search-bar" method="GET">
+        <input type="text" autofocus id="searchInput" name="s" value="{{ request.args.get('s', '') }}" placeholder="Enter Stock Symbol">
+        <button type="submit">Search</button>
+    </form>
+
+    <div id="searchQuery" class="title-element"></div>
+
+    {% if stock_info %}
+    <div class="stock-info">
+        <table border="1">
+            <thead>
+              <tr>
+                <th>Stock Information</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Stock Name:</strong></td>
+                <td>{{ stock_info['name'] }}</td>
+              </tr>
+              <tr>
+                <td><strong>Symbol:</strong></td>
+                <td>{{ stock_info['symbol'] }}</td>
+              </tr>
+              <tr>
+                <td><strong>Price:</strong></td>
+                <td>${{ stock_info['price'] }}</td>
+              </tr>
+              <tr>
+                <td><strong>High:</strong></td>
+                <td>${{ stock_info['high'] }}</td>
+              </tr>
+              <tr>
+                <td><strong>Low:</strong></td>
+                <td>${{ stock_info['low'] }}</td>
+              </tr>
+              <tr>
+                <td><strong>Open:</strong></td>
+                <td>${{ stock_info['open'] }}</td>
+              </tr>
+              <tr>
+                <td><strong>Previous Close:</strong></td>
+                <td>${{ stock_info['close'] }}</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+    {% elif message %}
+    <div class="stock-info">
+        <p>{{ message }}</p>
+    </div>
+    {% endif %}
+
+    <script src="{{ url_for('static', filename='js/stock.js') }}"></script>
+
+</body>
+</html>
