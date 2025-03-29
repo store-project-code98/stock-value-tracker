@@ -1,3 +1,9 @@
+import requests
+import mysql.connector
+import json
+import time
+import pandas as pd
+
 db = mysql.connector.connect(
     host="localhost",         
     user="root",   
@@ -15,12 +21,12 @@ data = response.json()
 
 print(json.dumps(data, indent=4))
 
-cursor.execute("CREATE DATABASE IF NOT EXISTS stock_data_db")
+cursor.execute("CREATE DATABASE IF NOT EXISTS stock_data_db2")
 
-cursor.execute("USE stock_data_db")
+cursor.execute("USE stock_data_db2")
 
 cursor.execute('''
-CREATE TABLE IF NOT EXISTS stock_data (
+CREATE TABLE IF NOT EXISTS stock_data2 (
     symbol VARCHAR(10) PRIMARY KEY, 
     name VARCHAR(255),
     current_price FLOAT,
